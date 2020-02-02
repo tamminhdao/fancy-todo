@@ -29,6 +29,10 @@ export const Util = () => {
     })
     return result
   }
+
+  const getTasksByGroupName = (taskList, groupName) => {
+    return taskList.filter(task => task["group"] === groupName)
+  }
   
-  return { sortTasksByGroup, groupSummary }
+  return { sortTasksByGroup, groupSummary, getTasksByGroupName }
 }

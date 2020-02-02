@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import './App.css'
 import { TaskGroup } from './TaskGroup'
-import { Util } from "./utils"
+import { Tasks } from "./Tasks"
+import { Router } from "@reach/router"
 
-const util = Util()
 const rawData = [
   {
     "id": 1,
@@ -78,15 +78,13 @@ const rawData = [
   }
 ]
 
-const grouppedData = util.sortTasksByGroup(rawData)
-const groupSummary = util.groupSummary(grouppedData)
-
 export default class App extends Component {
   render() {
     return (
-      <>
-      <TaskGroup groups={groupSummary} />
-      </>
+      <Router>
+      <TaskGroup path="/" rawData={rawData}/>
+      <Tasks path="/tasks/:groupName" rawData={rawData}/>
+      </Router>
     ) 
   }
 }

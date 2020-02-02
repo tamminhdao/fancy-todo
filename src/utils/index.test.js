@@ -108,4 +108,56 @@ describe("Util", () => {
     expect(groupAnalytics).toEqual(expectedResult)
     })
   })
+
+  describe("getTasksByGroupName", () => {
+    it("returns all the tasks in the group", () => {
+      const data = [{
+        "id": 5,
+        "group": "Purchases",
+        "task": "Buy paint",
+        "dependencyIds": [
+          1
+        ],
+        "completedAt": null
+      },
+      {
+        "id": 6,
+        "group": "Build Airplane",
+        "task": "Hammer nails into wood",
+        "dependencyIds": [
+          2,
+          3,
+          4
+        ],
+        "completedAt": null
+      },
+      {
+        "id": 7,
+        "group": "Build Airplane",
+        "task": "Paint wings",
+        "dependencyIds": [
+          5,
+          6
+        ],
+        "completedAt": null
+      }]
+
+      const purchasesTasks = [
+        {
+          "id": 5,
+          "group": "Purchases",
+          "task": "Buy paint",
+          "dependencyIds": [
+            1
+          ],
+          "completedAt": null
+        }
+      ]
+
+      const util = Util()
+      const filteredResult = util.getTasksByGroupName(data, "Purchases")
+      
+      expect(filteredResult).toEqual(purchasesTasks)
+    })
+  })
 })

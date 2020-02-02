@@ -1,6 +1,16 @@
 import React from "react"
 import { GroupRow } from "./GroupRow"
-export const TaskGroup = ({ groups }) => {
+import { Util } from "./utils"
+
+const util = Util()
+export const TaskGroup = ({ rawData }) => {
+  const [groups, setGroup] = React.useState([])
+
+  React.useEffect(() => {
+    const grouppedData = util.sortTasksByGroup(rawData)
+    const groupSummary = util.groupSummary(grouppedData)
+    setGroup(groupSummary)
+  }, [])
 
   return (
     <div>

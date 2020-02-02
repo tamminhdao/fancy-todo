@@ -2,7 +2,7 @@ import React from "react";
 
 export const GroupRow = ({ name, totalTasks, completedTasks }) => {
   return (
-    <a href="./">
+    <a href={`/tasks/${name}`}>
       <div>
         <img src="../public/group.svg" alt="group_icon"/>
       </div>
