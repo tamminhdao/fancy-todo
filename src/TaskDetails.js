@@ -2,12 +2,12 @@ import React from "react";
 import { Link } from "@reach/router";
 import { TaskRow } from "./TaskRow";
 import { Util } from "./utils";
-import DataContext from "./DataContext"
+import DataContext from "./DataContext";
 
 const util = Util();
 
 export const TaskDetails = ({ groupName }) => {
-  const taskList = React.useContext(DataContext)
+  const taskList = React.useContext(DataContext);
   const [tasks, setTasks] = React.useState(
     util.getTasksByGroupName(taskList, groupName)
   );
@@ -28,9 +28,14 @@ export const TaskDetails = ({ groupName }) => {
   };
 
   return (
-    <>
-      <h1> {groupName} </h1>
-      <Link to="/"> ALL GROUPS </Link>
+    <div className="content">
+      <div className="header">
+        <h2> {groupName} </h2>
+        <Link to="/" className="all-group">
+          {" "}
+          ALL GROUPS{" "}
+        </Link>
+      </div>
       <div>
         {tasks.map(task => (
           <TaskRow
@@ -41,6 +46,6 @@ export const TaskDetails = ({ groupName }) => {
           />
         ))}
       </div>
-    </>
+    </div>
   );
 };

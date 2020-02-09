@@ -1,7 +1,7 @@
 import React from "react";
 import { GroupRow } from "./GroupRow";
 import { Util } from "./utils";
-import DataContext from "./DataContext"
+import DataContext from "./DataContext";
 
 const util = Util();
 
@@ -16,8 +16,8 @@ export const TaskGroup = () => {
   }, []);
 
   return (
-    <div>
-      <h3>Things To Do</h3>
+    <div className="content">
+      <h2 className="header">Things To Do</h2>
       {groups.map(group => (
         <GroupRow
           name={group.name}
