@@ -1,15 +1,16 @@
 import React from "react";
+import { Link } from "@reach/router"
 
 export const GroupRow = ({ name, totalTasks, completedTasks }) => {
   return (
-    <a href={`/tasks/${name}`}>
-      <div>
-        <img src="../public/group.svg" alt="group_icon"/>
+    <Link to={`${name}`} className="group">
+      <div className="image-container">
+        <img src="./group.svg" alt="group_icon"/>
       </div>
-      <div>
+      <div className="info">
         <h3>{name}</h3>
         <h4>{`${completedTasks} OF ${totalTasks} COMPLETED`}</h4>
       </div>
-    </a>
+    </Link>
   )
 }

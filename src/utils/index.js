@@ -1,38 +1,48 @@
 export const Util = () => {
-
-  const sortTasksByGroup = (data) => {
+  const sortTasksByGroup = data => {
     const reducer = (accumulator, object) => {
-      let key = object["group"]
+      let key = object["group"];
       if (!accumulator[key]) {
-        accumulator[key] = []
+        accumulator[key] = [];
       }
-      accumulator[key].push(object)
-      return accumulator
-    }
+      accumulator[key].push(object);
+      return accumulator;
+    };
 
-    return data.reduce(reducer, {})
-  }
+    return data.reduce(reducer, {});
+  };
 
-  const groupSummary = (sortedTasks) => {
+  const groupSummary = sortedTasks => {
     const result = Object.keys(sortedTasks).map(groupName => {
-      const tasks = sortedTasks[groupName]
-      const totalTasks = tasks.length
+      const tasks = sortedTasks[groupName];
+      const totalTasks = tasks.length;
       const reducer = (total, current) => {
         if (current.completedAt) {
-          return total += 1
+          return (total += 1);
         } else {
-          return total
+          return total;
         }
-      }
-      const completedTasks = tasks.reduce(reducer, 0)
-      return { name: groupName, totalTasks: totalTasks, completedTasks: completedTasks }
-    })
-    return result
-  }
+      };
+      const completedTasks = tasks.reduce(reducer, 0);
+      return {
+        name: groupName,
+        totalTasks: totalTasks,
+        completedTasks: completedTasks
+      };
+    });
+    return result;
+  };
 
-  const getTasksByGroupName = (taskList, groupName) => {
-    return taskList.filter(task => task["group"] === groupName)
-  }
-  
-  return { sortTasksByGroup, groupSummary, getTasksByGroupName }
-}
+  const getTasksByGroupName = (tasklist, groupName) => {
+    return tasklist.filter(task => task["group"] === groupName);
+  };
+
+  const isTaskLocked = (task, tasklist) => {
+    return task["dependencyIds"]
+      .map(id => tasklist.find(task => task["id"] === id))
+      .map(task => task["completedAt"])
+      .includes(null);
+  };
+
+  return { sortTasksByGroup, groupSummary, getTasksByGroupName, isTaskLocked };
+};

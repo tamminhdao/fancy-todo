@@ -78,7 +78,7 @@ describe("Util", () => {
             "group": "Purchases",
             "task": "Buy hammer",
             "dependencyIds": [],
-            "completedAt": "2/3/20"
+            "completedAt": "yesterday"
           }, 
         ],
         "Build Airplane": [
@@ -159,5 +159,36 @@ describe("Util", () => {
       
       expect(filteredResult).toEqual(purchasesTasks)
     })
+  })
+
+  describe("checks if a task is locked", () => {
+    const data = [
+      {
+        "id": 1,
+        "group": "Purchases",
+        "task": "Go to the bank",
+        "dependencyIds": [2, 3],
+        "completedAt": null
+      },
+      {
+        "id": 2,
+        "group": "Purchases",
+        "task": "Buy hammer",
+        "dependencyIds": [],
+        "completedAt": "today"
+      },
+      {
+        "id": 3,
+        "group": "Build Airplane",
+        "task": "Have a snack",
+        "dependencyIds": [2],
+        "completedAt": null
+      }
+    ]
+
+    const util = Util()
+    expect(util.isTaskLocked(data[0], data)).toEqual(true)
+    expect(util.isTaskLocked(data[1], data)).toEqual(false)
+    expect(util.isTaskLocked(data[2], data)).toEqual(false)
   })
 })
