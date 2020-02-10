@@ -1,8 +1,8 @@
-import { createContext } from "react"
-import { DataStore } from "./data-store"
+import { createContext } from "react";
+import { DataStore } from "./data-store";
 
-const data = DataStore.retrieve()
+const data = DataStore.retrieve();
 
-const DataContext = createContext(data)
+const DataContext = createContext(data);
 
-export default DataContext
+export default DataContext;
