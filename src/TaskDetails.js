@@ -1,15 +1,14 @@
 import React from "react";
-import { Link } from "@reach/router";
 import { TaskRow } from "./TaskRow";
 import { Util } from "./utils";
 import DataContext from "./DataContext";
 
 const util = Util();
 
-export const TaskDetails = ({ groupName }) => {
+export const TaskDetails = props => {
   const taskList = React.useContext(DataContext);
   const [tasks, setTasks] = React.useState(
-    util.getTasksByGroupName(taskList, groupName)
+    util.getTasksByGroupName(taskList, props.groupName)
   );
 
   const handleClick = task => {
@@ -30,11 +29,16 @@ export const TaskDetails = ({ groupName }) => {
   return (
     <div className="content">
       <div className="header">
-        <h2> {groupName} </h2>
-        <Link to="/" className="all-group">
-          {" "}
-          ALL GROUPS{" "}
-        </Link>
+        <h2> {props.groupName} </h2>
+        <div
+          className="all-group"
+          onClick={() => {
+            props.setGroupView(true);
+            props.setDetailView(false);
+          }}
+        >
+          ALL GROUPS
+        </div>
       </div>
       <div>
         {tasks.map(task => (
